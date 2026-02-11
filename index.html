@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI TESDA LMS - Enroll, Learn, Get Certified with technical skills training">
+    <title>AI TESDA LMS - Learning Management System</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+   <!-- NAVBAR -->
+<header class="navbar">
+  <nav class="nav-container">
+
+    <a href="index.html" class="nav-brand">
+    <img src="ai.png" alt="AI TESDA LMS Logo" class="logo-img" width="40" height="40">
+    <span class="brand-text">AI TESDA LMS</span>
+    </a>
+
+    <!-- NAV LINKS -->
+    <div class="nav-links" id="navMenu">
+      <a href="index.html#hero" class="nav-link">Home</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#courses" class="nav-link">Courses</a>
+      <a href="index.html#footer" class="nav-link">Contact</a>
+    </div>
+
+    <!-- HAMBURGER TOGGLE -->
+    <label class="hamburger">
+      <input type="checkbox" id="menuToggle">
+      <svg viewBox="0 0 32 32">
+        <path class="line line-top-bottom"
+          d="M27 10 13 10C10.8 10 9 8.2 9 6
+             9 3.5 10.8 2 13 2
+             15.2 2 17 3.8 17 6
+             L17 26C17 28.2 18.8 30
+             21 30 23.2 30 25 28.2
+             25 26 25 23.8 23.2 22
+             21 22L7 22" />
+        <path class="line" d="M7 16 27 16" />
+      </svg>
+    </label>
+
+  </nav>
+</header>
+
+
+    <!-- HERO SECTION -->
+    <!-- HERO SECTION -->
+<section class="hero" id="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <!-- LOGO CONTAINER - MGA LOGO SA TAAS -->
+            <div class="logo-container">
+            <a href="index.html">
+                <img src="ai.png" alt="Alliances Institute Logo" class="hero-logo" loading="lazy">
+            </a>
+
+            <a href="https://www.tesda.gov.ph/" target="_blank" rel="noopener noreferrer">
+                <img src="tesda.png" alt="TESDA Official Logo" class="tesda-logo" loading="lazy">
+            </a>
+        </div>
+
+            
+            <!-- TEXT CONTENT - NASA BABA NG MGA LOGO -->
+            <div class="hero-text">
+                <div class="hero-title-group">
+                    <h1 class="hero-title">Alliances TESDA</h1>
+                </div>
+                <h2 class="hero-subtitle">Learning Management System</h2>
+                <p class="hero-tagline">Enroll • Learn • Get Certified</p>
+                <button class="btn btn-primary" onclick="goToLogin()" aria-label="Go to login page">
+                    <span>LOG IN</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-gallery">
+            <!-- GALLERY ITEMS REMAIN THE SAME -->
+            <div class="gallery-item">
+                <img src="barten.jpg" alt="Bartending Training Students" loading="lazy">
+                <div class="gallery-overlay">Bartending</div>
+            </div>
+            <div class="gallery-item">
+                <img src="eng.jpg" alt="Engineering Skills Training" loading="lazy">
+                <div class="gallery-overlay">Engineering</div>
+            </div>
+            <div class="gallery-item">
+                <img src="computer-training.jpg" alt="Computer Skills Training" loading="lazy">
+                <div class="gallery-overlay">IT Skills</div>
+            </div>
+            <div class="gallery-item">
+                <img src="cooking.jpg" alt="Cooking Training Students" loading="lazy">
+                <div class="gallery-overlay">Culinary Arts</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ABOUT/TRUST SECTION -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2 class="section-title">Trusted by 25,000+ Happy Students</h2>
+                <p class="section-description">
+                    With lots of unique learning programs, TESDA helps students gain practical skills 
+                    and industry certifications that open doors to career opportunities.
+                </p>
+                <button class="btn btn-secondary" onclick="scrollToCourses()" aria-label="Enroll in courses">
+                    <span>ENROLL NOW</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card stat-card-primary">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="stat-number" data-target="38">0</span>
+                    <p class="stat-label">Active Users</p>
+                    <p class="stat-description">Accessing our amazing resources</p>
+                </div>
+                <div class="stat-card stat-card-success">
+                    <div class="stat-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span class="stat-number" data-target="15">0</span>
+                    <p class="stat-label">Courses</p>
+                    <p class="stat-description">Made for you that you can trust!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+<section id="courses" class="courses-section">
+
+    <div class="courses-header">
+        
+        <div class="header-content">
+            <h2 class="section-title">AVAILABLE COURSES</h2>
+            <p>Empower your future with our TESDA-accredited programs.</p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="courseSearch" placeholder="Search for a course (e.g., Baking, NC II, Finance)...">
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All Courses</button>
+            <button class="filter-btn" data-filter="NC II">NC II</button>
+            <button class="filter-btn" data-filter="NC III">NC III</button>
+            <button class="filter-btn" data-filter="HOSPITALITY">Hospitality</button>
+            <button class="filter-btn" data-filter="BUSINESS">Business</button>
+        </div>
+    </div>
+
+    <div class="courses-grid">
+        
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&h=400&fit=crop" alt="Bartending Course">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">BARTENDING</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Mixology & Bar Service</h3>
+                <p class="course-desc">
+                    Learn cocktail preparation, beverage costing, bar service etiquette,
+                    and professional mixology skills.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 4 months</span>
+                    <span>📚 160 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&h=400&fit=crop" alt="Bread and Pastry Production">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">BAKING</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Bread and Pastry Production</h3>
+                <p class="course-desc">
+                    Master the art of baking breads, preparing pastries, cakes, and iced desserts. 
+                    Includes food safety, portion control, and professional presentation techniques.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 3 months</span>
+                    <span>📚 141 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+      
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1544031656-3539268f766e?w=600&h=400&fit=crop" alt="Dressmaking Course">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">FASHION DESIGN</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Dressmaking & Garment Design</h3>
+                <p class="course-desc">
+                    Master the art of garment construction. Learn professional pattern drafting, 
+                    fabric selection, and industrial sewing techniques for casual apparel.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 5 months</span>
+                    <span>📚 275 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="Bookkeeping Course">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">BUSINESS & FINANCE</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Bookkeeping NC II</h3>
+                <p class="course-desc">
+                    Learn to maintain journalize transactions, post updates to ledgers, 
+                    prepare financial reports, and master the accounting cycle for business.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 6 months</span>
+                    <span>📚 292 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop" alt="Visual Graphic Design">
+                <span class="nc-badge">LEVEL III</span>
+                <span class="category-badge">CREATIVE ARTS</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Visual Graphic Design LEVEL III</h3>
+                <p class="course-desc">
+                    Master digital illustration, layouting, and design principles. 
+                    Develop professional skills in branding, packaging, and high-impact visual communication.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 8 months</span>
+                    <span>📚 487 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop" alt="Food and Beverage Services">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">HOSPITALITY</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Food and Beverage Services</h3>
+                <p class="course-desc">
+                    Master the art of fine dining service. Learn table setup, room service, 
+                    handling guest complaints, and providing professional food and wine service.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 4 months</span>
+                    <span>📚 356 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop" alt="Front Office Services">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">HOTEL OPERATIONS</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Front Office Services</h3>
+                <p class="course-desc">
+                    Excel in guest relations and hotel operations. Learn reservation procedures, 
+                    reception techniques, guest accounting, and professional concierge services.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 5 months</span>
+                    <span>📚 436 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=400&fit=crop" alt="Events Management Services">
+                <span class="nc-badge">NC III</span>
+                <span class="category-badge">HOSPITALITY & EVENTS</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Events Management Services</h3>
+                <p class="course-desc">
+                    Become a professional event planner. Learn to coordinate on-site activities, 
+                    manage event proposals, develop programs, and handle post-event evaluations.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 2 months</span>
+                    <span>📚 108 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=600&h=400&fit=crop" alt="Virtual Assistant Course">
+                <span class="nc-badge">LEVEL III</span>
+                <span class="category-badge">REMOTE WORK / IT</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Virtual Assistant LEVEL III</h3>
+                <p class="course-desc">
+                    Master the essentials of remote administrative support. Learn calendar management, 
+                    social media coordination, business branding, and professional client communication.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 3 months</span>
+                    <span>📚 154 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Computerized Bookkeeping">
+                <span class="nc-badge">NC IV</span>
+                <span class="category-badge">ACCOUNTANCY</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Computerized Bookkeeping</h3>
+                <p class="course-desc">
+                    Advance your financial career with automated systems. Master computerized 
+                    accounting software, financial analysis, and the preparation of statutory reports.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 4 months</span>
+                    <span>📚 292 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1621905235277-33306d790407?w=600&h=400&fit=crop" alt="EIM Course">
+                <span class="nc-badge">NC II</span>
+                <span class="category-badge">CONSTRUCTION</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">Electrical Installation & Maintenance</h3>
+                <p class="course-desc">
+                    Master residential and commercial wiring. Learn to install electrical conduits, 
+                    wire lighting systems, and maintain power circuits following safety standards.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 5 months</span>
+                    <span>📚 196 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+        <div class="course-card landscape">
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=600&h=400&fit=crop" alt="E-Commerce Operations">
+                <span class="nc-badge">LEVEL III</span>
+                <span class="category-badge">DIGITAL BUSINESS</span>
+            </div>
+            <div class="course-details">
+                <h3 class="course-title">E-Commerce Operations LEVEL III</h3>
+                <p class="course-desc">
+                    Build and manage a successful online business. Master product listing, 
+                    digital marketing strategies, order fulfillment, and online customer relationship management.
+                </p>
+                <div class="course-meta horizontal">
+                    <span>🕒 3 months</span>
+                    <span>📚 174 hours</span>
+                </div>
+                <button class="enroll-now-btn" onclick="window.location.href='login.html'">Learn More</button>
+            </div>
+        </div>
+
+
+    </div> </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- FOOTER -->
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-contact">
+                    <a href="tel:09101427592" class="contact-link">
+                        <i class="fas fa-phone"></i>
+                        <span>09101427592</span>
+                    </a>
+                    <a href="mailto:altesda@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>altesda@gmail.com</span>
+                    </a>
+                </div>
+                <div class="footer-social">
+                    <p class="social-label">Follow us:</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/AlliancesInstitute" aria-label="Facebook page" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://youtube.com/AlliancesInstitute" aria-label="YouTube channel" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2024 AI TESDA LMS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Navigation functions
+        function goToLogin() {
+            window.location.href = "login.html";
+        }
+
+        function scrollToCourses() {
+            document.getElementById("courses").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileToggle.classList.toggle('active');
+            });
+
+            // Counter animation with Intersection Observer
+            const counters = document.querySelectorAll(".stat-number");
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute("data-target");
+                        let count = 0;
+                        
+                        const updateCounter = () => {
+                            const increment = target / 50;
+                            count += increment;
+                            
+                            if (count < target) {
+                                counter.innerText = Math.floor(count);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+
+            // Course card click handlers
+            document.querySelectorAll('.btn-course').forEach(button => {
+                button.addEventListener('click', function() {
+                    const courseTitle = this.closest('.course-card').querySelector('.course-title').textContent;
+                    alert(`More information about ${courseTitle} will be available soon!`);
+                });
+            });
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile menu if open
+                        navLinks.classList.remove('active');
+                        mobileToggle.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+    
+<script>
+    // 1. Navigation Functions
+    function goToLogin() {
+        window.location.href = "login.html";
+    }
+
+    function scrollToCourses() {
+        document.getElementById("courses").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+    // 2. Counter Animation
+    const counters = document.querySelectorAll(".stat-number");
+    const startCounter = (counter) => {
+        const target = +counter.getAttribute("data-target");
+        let count = 0;
+        const update = () => {
+            const increment = target / 50;
+            count += increment;
+            if (count < target) {
+                counter.innerText = Math.floor(count);
+                requestAnimationFrame(update);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        update();
+    };
+    counters.forEach(counter => startCounter(counter));
+
+    // 3. Combined Search and Filter Logic (The Fix)
+    const searchInput = document.getElementById('courseSearch');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const courseCards = document.querySelectorAll('.course-card');
+
+    function filterCourses() {
+        const searchText = searchInput.value.toLowerCase();
+        // Kunin ang text ng active button
+        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter').toLowerCase();
+
+        courseCards.forEach(card => {
+            // Kunin ang lahat ng text sa loob ng card (title, badges, description)
+            const cardText = card.textContent.toLowerCase();
+            
+            // Check kung ang search text ay nasa loob ng card
+            const matchesSearch = cardText.includes(searchText);
+            
+            // Check kung ang filter category ay nasa loob ng card
+            const matchesFilter = activeFilter === 'all' || cardText.includes(activeFilter);
+
+            // Display logic
+            if (matchesSearch && matchesFilter) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
+    // Listeners
+    searchInput.addEventListener('input', filterCourses);
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterCourses();
+        });
+    });
+</script>
+<script>
+  const toggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  toggle.addEventListener("change", () => {
+    navMenu.classList.toggle("active");
+  });
+</script>
+
+</body>
+</html>

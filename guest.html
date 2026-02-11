@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Dashboard | AI TESDA LMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="guest.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="brand" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+             <img src="ai.png" alt="AI TESDA LMS Logo" class="logo-img" width="40" height="40">
+            <span>AI TESDA LMS</span>
+        </a>
+            <ul class="nav-links">
+                <li><a href="#" class="active" id="nav-home">Home</a></li>
+                <li><a href="#" id="nav-calendar">Calendar</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <span class="guest-indicator">
+                <i class='bx bx-user-circle'></i> 
+                <span class="guest-text">Guest Mode</span>
+            </span>
+            <button class="btn-login" onclick="window.location.href='login.html'">
+    Login
+</button>
+            <button id="drawer-toggle" class="btn-icon">
+                <i class='bx bx-menu-alt-right'></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN DASHBOARD -->
+    <main class="dashboard-container">
+        <section class="content-area">
+
+            <!-- DASHBOARD CONTENT -->
+            <div id="dashboard-main-content">
+                <header class="content-header">
+                    <h1>Dashboard <span class="badge-guest">Guest</span></h1>
+                </header>
+
+                <!-- TIMELINE SECTION -->
+                <div id="timeline-section" class="card">
+                    <div class="card-header">
+                        <h2><i class='bx bx-time-five'></i> Timeline</h2>
+                        <div class="timeline-controls">
+                            <div class="search-box">
+                                <i class='bx bx-search'></i>
+                                <input type="text" id="timeline-search" placeholder="Search activities...">
+                            </div>
+                            <div class="sort-wrapper">
+                                <i class='bx bx-sort-alt-2'></i>
+                                <select id="sort-options" class="select-input">
+                                    <option value="date">Sort by Dates</option>
+                                    <option value="course">Sort by Courses</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tabs-container">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-filter="all">All</button>
+                            <button class="tab-btn" data-filter="overdue">Overdue</button>
+                            <button class="tab-btn" data-filter="7days">Next 7 days</button>
+                            <button class="tab-btn" data-filter="30days">Next 30 days</button>
+                        </div>
+                    </div>
+
+                    <div id="timeline-content" class="timeline-list">
+                        <div class="empty-state">
+                            <i class='bx bx-calendar-x'></i>
+                            <p>No in-progress courses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CALENDAR SECTION -->
+            <div id="calendar-section" class="card">
+                <div class="card-header">
+                    <div class="calendar-title-wrapper">
+                        <button id="back-to-dashboard" class="btn-icon-sm hidden">
+                            <i class='bx bx-arrow-back'></i>
+                        </button>
+                        <h2 id="calendar-month-year">
+                            <i class='bx bx-calendar'></i> 
+                            <span>Month Year</span>
+                        </h2>
+                    </div>
+
+                    <div id="calendar-sorting" class="calendar-filters hidden">
+                        <button class="cal-sort-btn active" data-view="month">Month</button>
+                        <button class="cal-sort-btn" data-view="day">Day</button>
+                        <button class="cal-sort-btn" data-view="upcoming">Upcoming</button>
+                    </div>
+
+                    <div class="calendar-nav">
+                        <button id="prev-month" class="btn-icon-sm">
+                            <i class='bx bx-chevron-left'></i>
+                        </button>
+                        <button id="next-month" class="btn-icon-sm">
+                            <i class='bx bx-chevron-right'></i>
+                        </button>
+                        <button id="full-calendar-btn" class="btn-secondary">
+                            <i class='bx bx-expand'></i> Full Calendar
+                        </button>
+                    </div>
+                </div>
+
+                <div id="calendar-render-area">
+                    <div class="calendar-grid-header">
+                        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+                        <div>Thu</div><div>Fri</div><div>Sat</div>
+                    </div>
+                    <div id="calendar-days" class="calendar-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT DRAWER -->
+        <aside id="right-drawer" class="drawer">
+            <div class="drawer-header">
+                <h3><i class='bx bx-info-circle'></i> Overview</h3>
+                <button id="drawer-close" class="btn-icon">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            
+            <div class="drawer-content">
+                <div id="sidebar-dashboard-view">
+                    <div class="sidebar-group">
+                        <h4>Recently Accessed</h4>
+                        <div class="recent-items">
+                            <div class="empty-state-small">
+                                <i class='bx bx-time'></i>
+                                <p>No recent items</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sidebar-calendar-view" class="hidden">
+                    <div class="sidebar-group">
+                        <h4>Events Key</h4>
+                        <ul class="event-keys">
+                            <li>
+                                <span class="key-color site"></span> 
+                                <span>Site events</span>
+                                <i class='bx bx-show eye-toggle' data-type="site"></i>
+                            </li>
+                            <li>
+                                <span class="key-color category"></span> 
+                                <span>Category events</span>
+                                <i class='bx bx-show eye-toggle' data-type="category"></i>
+                            </li>
+                            <li>
+                                <span class="key-color course"></span> 
+                                <span>Course events</span>
+                                <i class='bx bx-show eye-toggle' data-type="course"></i>
+                            </li>
+                            <li>
+                                <span class="key-color group"></span> 
+                                <span>Group events</span>
+                                <i class='bx bx-show eye-toggle' data-type="group"></i>
+                            </li>
+                            <li>
+                                <span class="key-color user"></span> 
+                                <span>User events</span>
+                                <i class='bx bx-show eye-toggle' data-type="user"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div id="overlay" class="overlay"></div>
+    </main>
+
+    <script src="guest.js"></script>
+</body>
+</html>

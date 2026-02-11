@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | AI TESDA LMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --secondary: #eeb21b;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --border: #d1d5db;
+            --border-light: #e5e7eb;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, 
+                rgba(238, 178, 27, 0.1) 0%, 
+                rgba(20, 184, 129, 0.15) 50%, 
+                rgba(255, 255, 255, 0.9) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+      
+        /* Navbar Main */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #436e5f 0%, #7ED957 50%, #4CAF50 100%);
+            box-shadow: var(--shadow-md);
+            height: var(--navbar-height);
+
+            /* --- DITO ANG DAGDAG --- */
+            animation: navSlideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* Nav Links (Individual) */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            transition: color var(--transition-base);
+            padding: var(--spacing-sm) 0;
+            font-family: Arial, sans-serif;
+
+            /* --- STAGGERED FADE-IN --- */
+            animation: navLinkFade 0.5s ease forwards;
+            opacity: 0; /* Default invisible bago mag-animate */
+        }
+
+        /* Pa-isa-isang pagpasok ng menu items */
+        .nav-links li:nth-child(1) .nav-link { animation-delay: 0.4s; }
+        .nav-links li:nth-child(2) .nav-link { animation-delay: 0.5s; }
+        .nav-links li:nth-child(3) .nav-link { animation-delay: 0.6s; }
+        .nav-links li:nth-child(4) .nav-link { animation-delay: 0.7s; }
+            
+        /* ===== MAIN CONTENT ===== */
+        .login-page-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px; /* Space for fixed navbar */
+            background: linear-gradient(135deg, 
+                rgba(238, 178, 27, 0.582) 0%,
+                rgba(20, 184, 129, 0.596) 50%,  
+                rgba(255, 255, 255, 0.466) 100%);
+        }
+
+        .login-page-container::before,
+        .login-page-container::after {
+            content: '';
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .login-page-container::before {
+            top: -5%;
+            right: -5%;
+            width: min(400px, 80vw);
+            height: min(400px, 80vw);
+            
+            background-size: contain;
+        }
+
+        .login-page-container::after {
+            bottom: -5%;
+            left: -5%;
+            width: min(300px, 70vw);
+            height: min(300px, 70vw);
+            
+            background-size: contain;
+        }
+
+        /* ===== DESKTOP LOGIN CONTAINER ===== */
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            width: 1000px;
+            max-width: 100%;
+            min-height: 600px;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .container:hover {
+            
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        /* FORM CONTAINERS FOR DESKTOP */
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+            
+        }
+
+        .sign-in-container {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+
+        .sign-up-container {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        /* SHARED FORM STYLING */
+        .auth-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 60px;
+            height: 100%;
+            text-align: center;
+        }
+
+        .auth-logo.small {
+            width: 65px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        /* INPUT STYLES */
+        input {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            padding: 14px 18px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            background-color: #fff;
+            border-color: #00a82d;
+            box-shadow: 0 0 0 4px rgba(0, 168, 45, 0.1);
+        }
+
+        /* BUTTON STYLING */
+        .login-submit-btn {
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #004b14, #00c853);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 15px;
+            width: 100%;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 168, 45, 0.35);
+            letter-spacing: 2px;
+        }
+
+        .login-submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* LINKS & TEXT */
+        .forgot-pass {
+            color: #00a82d;
+            font-size: 13px;
+            text-decoration: none;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .guest-text {
+            font-size: 13px;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        /* SOCIAL ICONS */
+        .social-container {
+            margin-bottom: 15px;
+        }
+
+        .social-container a {
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 8px;
+            height: 45px;
+            width: 45px;
+            color: #333;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-container a:hover {
+            background-color: #f1f3f6;
+            border-color: #00a82d;
+            color: #00a82d;
+        }
+
+        /* OVERLAY SECTION (DESKTOP ONLY) */
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .overlay {
+            background: linear-gradient(135deg, #1fb900, #ff5e00);
+            color: #ffffff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-panel h1 {
+            color: white;
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .overlay-panel p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 20px 0 30px;
+            opacity: 0.9;
+        }
+
+        .overlay-left { transform: translateX(-20%); }
+        .overlay-right { right: 0; transform: translateX(0); }
+
+        /* Ghost button para sa overlay - PINALITAN NG LINKS */
+        .overlay-link {
+            background-color: transparent;
+            border: 2px solid #ffffff;
+            border-radius: 12px;
+            color: #fff;
+            padding: 12px 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .overlay-link:hover {
+            background-color: #fff;
+            color: #00a82d;
+            text-decoration: none;
+        }
+
+        /* ANIMATION CLASSES FOR DESKTOP */
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+
+        @keyframes show {
+            0%, 49.99% { opacity: 0; z-index: 1; }
+            50%, 100% { opacity: 1; z-index: 5; }
+        }
+
+        
+
+        /* Mobile Toggle Links - UPDATED FOR LINKS */
+        .mobile-toggle-links {
+            display: none;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-sm);
+            justify-content: center;
+            gap: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .mobile-toggle-link {
+            flex: 1;
+            text-align: center;
+            padding: 14px 24px;
+            font-size: 1rem;
+            background: var(--bg-light);
+            border: 2px solid transparent;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle-link:hover {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: var(--primary);
+            text-decoration: none;
+        }
+
+        .mobile-toggle-link.active {
+            background: linear-gradient(135deg, var(--primary), #00c853);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            /* MOBILE NAV */
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(238, 178, 27, 0.582) 0%,rgba(20, 184, 129, 0.781) 50%,  rgba(255, 255, 255, 0.582) 100%);
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+                transform: translateY(-20px);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.35s ease;
+            }
+            
+         
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* MOBILE LOGIN CONTAINER */
+            .login-page-container {
+                padding: 1rem;
+                margin-top: 70px;
+                background: linear-gradient(135deg, 
+                    rgba(238, 178, 27, 0.15) 0%, 
+                    rgba(20, 184, 129, 0.1) 50%, 
+                    rgba(255, 255, 255, 0.9) 100%);
+            }
+
+            /* RESET CONTAINER FOR MOBILE */
+            .container {
+                width: 100%;
+                max-width: 100%;
+                min-height: auto;
+                height: auto;
+                overflow: visible;
+                background: transparent;
+                box-shadow: none;
+                border-radius: 0;
+                perspective: none;
+                transform: none !important;
+                display: block;
+                position: relative;
+            }
+
+            .container:hover {
+               
+                box-shadow: none !important;
+            }
+
+            /* HIDE OVERLAY COMPLETELY ON MOBILE */
+            .overlay-container {
+                display: none !important;
+            }
+
+            /* MOBILE FORM STYLES */
+            .form-container {
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: auto !important;
+                transform: none !important;
+                opacity: 1 !important;
+                display: none;
+               background: linear-gradient(135deg, 
+                rgba(238, 178, 27, 0.582) 0%,
+                rgba(34, 184, 20, 0.596) 50%,  
+                rgba(255, 255, 255, 0.466) 100%);
+                border-radius: var(--radius);
+                padding: 2.5rem 1.5rem;
+                margin-bottom: 0;
+                box-shadow: var(--shadow);
+                left: 0 !important;
+                right: 0 !important;
+                top: 0 !important;
+                bottom: 0 !important;
+            }
+
+            /* SHOW ACTIVE FORM ON MOBILE */
+            .form-container.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+
+            /* HIDE INACTIVE FORMS ON MOBILE */
+            .form-container:not(.active) {
+                display: none !important;
+            }
+
+            /* INITIAL STATE: SHOW SIGN-IN, HIDE SIGN-UP */
+            .sign-in-container.active {
+                display: block;
+            }
+            
+            .sign-up-container:not(.active) {
+                display: none !important;
+            }
+
+            /* ADJUST FORM FOR MOBILE */
+            .auth-form {
+                padding: 0 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            /* MOBILE TOGGLE LINKS - SHOW ON MOBILE */
+            .mobile-toggle-links {
+                display: flex;
+            }
+
+            /* FORM FOOTER TEXT FOR MOBILE */
+            .form-footer-text {
+                text-align: center;
+                margin-top: 25px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border-light);
+                color: var(--text-secondary);
+                font-size: 14px;
+            }
+
+            .form-footer-text a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .form-footer-text a:hover {
+                text-decoration: underline;
+            }
+
+            /* RESET DESKTOP ANIMATION CLASSES FOR MOBILE */
+            .container.right-panel-active .sign-in-container,
+            .container.right-panel-active .sign-up-container {
+                transform: none !important;
+            }
+        }
+
+        /* FOR VERY SMALL SCREENS */
+        @media (max-width: 480px) {
+            .auth-form {
+                padding: 0 10px;
+            }
+
+            .auth-form h2 {
+                font-size: 1.25rem;
+            }
+
+            .mobile-toggle-links {
+                flex-direction: column;
+                gap: 12px;
+                padding: 1.25rem;
+            }
+
+            .mobile-toggle-link {
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            .login-page-container::before,
+            .login-page-container::after {
+                opacity: 0.05;
+            }
+
+            .form-container {
+                padding: 2rem 1.25rem;
+            }
+        }
+
+        /* FADE ANIMATION */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" style="text-decoration: none;">
+    <div class="nav-brand">
+        <img src="ai.png" alt="AI TESDA LMS Logo" class="logo-img" width="40" height="40">
+        <span class="brand-text">AI TESDA LMS</span>
+    </div>
+</a>
+
+            <!-- NAV LINKS -->
+            <div class="nav-links" id="navMenu">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="index.html#footer" class="nav-link">Contact</a>
+            </div>
+
+            <!-- HAMBURGER TOGGLE -->
+            <label class="hamburger">
+                <input type="checkbox" id="menuToggle">
+                <svg viewBox="0 0 32 32">
+                    <path class="line line-top-bottom"
+                        d="M27 10 13 10C10.8 10 9 8.2 9 6
+                           9 3.5 10.8 2 13 2
+                           15.2 2 17 3.8 17 6
+                           L17 26C17 28.2 18.8 30
+                           21 30 23.2 30 25 28.2
+                           25 26 25 23.8 23.2 22
+                           21 22L7 22" />
+                    <path class="line" d="M7 16 27 16" />
+                </svg>
+            </label>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="login-page-container">
+        <div class="login-content-wrapper container" id="container">
+            
+            <div class="form-container sign-up-container">
+                <form action="#" class="auth-form">
+                    <a href="index.html" class="logo-link">
+                    <img src="ai.png" alt="AI Logo" class="auth-logo small">
+                    </a>
+                    <h2>Create Account</h2>
+                    <div class="social-container">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-google"></i></a>
+                    </div>
+                    <span style="color: var(--text-secondary); margin-bottom: 20px; display: block;">
+                        or use your details for registration
+                    </span>
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit" class="login-submit-btn">SIGN UP</button>
+                    
+                    <!-- Additional text for mobile users -->
+                    <div class="form-footer-text" style="display: none;">
+                        Already have an account? <a href="#" id="mobileSwitchToSignIn">Sign In</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container sign-in-container active">
+                <form action="#" class="auth-form">
+                    <a href="index.html" class="logo-link">
+                    <img src="ai.png" alt="AI Logo" class="auth-logo small">
+                    </a>
+                    <h2>Log in</h2>
+                    <div class="social-container">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-google"></i></a>
+                    </div>
+                    <span style="color: var(--text-secondary); margin-bottom: 20px; display: block;">
+                        Enter your credentials
+                    </span>
+                    <input type="text" placeholder="Username" required>
+                    <input type="password" placeholder="Password" required>
+                    <a href="#" class="forgot-pass">Forgot Password?</a>
+                    <button type="submit" class="login-submit-btn">LOG IN</button>
+                    <p class="guest-text">Don't have an account? <a href="guest.html" style="color: #0081a7; font-weight: bold;">Explore as Guest</a></p>
+                    
+                    <!-- Additional text for mobile users -->
+                    <div class="form-footer-text" style="display: none;">
+                        New to AI TESDA? <a href="#" id="mobileSwitchToSignUp">Create Account</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>WELCOME BACK!</h1>
+                        <p>To keep connected with us, please login with your account.</p>
+                        <a href="#" class="overlay-link" id="desktopSignIn">LOG IN</a>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>HELLO, FRIEND!</h1>
+                        <p>Enter your personal details and start your journey with AI TESDA LMS.</p>
+                        <a href="#" class="overlay-link" id="desktopSignUp">SIGN UP</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div> 
+    </div>
+
+    <script>
+        // Hamburger menu
+        const toggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+
+        toggle.addEventListener("change", () => {
+            navMenu.classList.toggle("active");
+        });
+
+        // Get elements
+        const container = document.getElementById('container');
+        const signInForm = document.querySelector('.sign-in-container');
+        const signUpForm = document.querySelector('.sign-up-container');
+        
+        // Desktop overlay LINKS
+        const desktopSignUp = document.getElementById('desktopSignUp');
+        const desktopSignIn = document.getElementById('desktopSignIn');
+        
+        // Mobile toggle LINKS
+        const mobileSignIn = document.getElementById('mobileSignIn');
+        const mobileSignUp = document.getElementById('mobileSignUp');
+        
+        // Mobile footer text links (hidden by default, shown on mobile)
+        const mobileSwitchToSignIn = document.getElementById('mobileSwitchToSignIn');
+        const mobileSwitchToSignUp = document.getElementById('mobileSwitchToSignUp');
+
+        // Function to update mobile link active state
+        function updateMobileLinkActiveState(isSignUpActive) {
+            if (mobileSignIn && mobileSignUp) {
+                if (isSignUpActive) {
+                    mobileSignIn.classList.remove('active');
+                    mobileSignUp.classList.add('active');
+                } else {
+                    mobileSignIn.classList.add('active');
+                    mobileSignUp.classList.remove('active');
+                }
+            }
+        }
+
+        // Function to switch to Sign In
+        function showSignInForm(e) {
+            if (e) e.preventDefault();
+            
+            if (window.innerWidth <= 768) {
+                // MOBILE: Use display property
+                signInForm.classList.add('active');
+                signUpForm.classList.remove('active');
+                updateMobileLinkActiveState(false);
+            } else {
+                // DESKTOP: Use right-panel-active class
+                container.classList.remove("right-panel-active");
+            }
+        }
+
+        // Function to switch to Sign Up
+        function showSignUpForm(e) {
+            if (e) e.preventDefault();
+            
+            if (window.innerWidth <= 768) {
+                // MOBILE: Use display property
+                signInForm.classList.remove('active');
+                signUpForm.classList.add('active');
+                updateMobileLinkActiveState(true);
+            } else {
+                // DESKTOP: Use right-panel-active class
+                container.classList.add("right-panel-active");
+            }
+        }
+
+        // Add event listeners to desktop overlay LINKS
+        if (desktopSignUp) {
+            desktopSignUp.addEventListener('click', showSignUpForm);
+        }
+        
+        if (desktopSignIn) {
+            desktopSignIn.addEventListener('click', showSignInForm);
+        }
+
+        // Add event listeners to mobile toggle LINKS
+        if (mobileSignIn) {
+            mobileSignIn.addEventListener('click', showSignInForm);
+        }
+        
+        if (mobileSignUp) {
+            mobileSignUp.addEventListener('click', showSignUpForm);
+        }
+
+        // Add event listeners to mobile footer text links
+        if (mobileSwitchToSignIn) {
+            mobileSwitchToSignIn.addEventListener('click', showSignInForm);
+        }
+        
+        if (mobileSwitchToSignUp) {
+            mobileSwitchToSignUp.addEventListener('click', showSignUpForm);
+        }
+
+        // Initialize based on viewport
+        function initializeView() {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // MOBILE: Start with Sign In active
+                signInForm.classList.add('active');
+                signUpForm.classList.remove('active');
+                updateMobileLinkActiveState(false);
+                
+                // Hide overlay completely
+                document.querySelector('.overlay-container').style.display = 'none';
+                
+                // Reset desktop animations
+                container.classList.remove("right-panel-active");
+                
+                // Show mobile footer text links
+                const footerTexts = document.querySelectorAll('.form-footer-text');
+                footerTexts.forEach(text => {
+                    text.style.display = 'block';
+                });
+                
+                // Show mobile toggle links
+                document.querySelector('.mobile-toggle-links').style.display = 'flex';
+            } else {
+                // DESKTOP: Start with Sign In active
+                container.classList.remove("right-panel-active");
+                
+                // Show overlay
+                document.querySelector('.overlay-container').style.display = 'block';
+                
+                // Ensure both forms are visible (positioned)
+                signInForm.style.display = 'block';
+                signUpForm.style.display = 'block';
+                
+                // Hide mobile footer text links
+                const footerTexts = document.querySelectorAll('.form-footer-text');
+                footerTexts.forEach(text => {
+                    text.style.display = 'none';
+                });
+                
+                // Hide mobile toggle links
+                document.querySelector('.mobile-toggle-links').style.display = 'none';
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', initializeView);
+        window.addEventListener('resize', initializeView);
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    toggle.checked = false;
+                }
+            });
+        });
+
+        // Prevent form submission for demo
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Form submitted! (Demo only)');
+            });
+        });
+    </script>
+</body>
+</html>
